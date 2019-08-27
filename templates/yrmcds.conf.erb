@@ -1,0 +1,89 @@
+# Configuration file for yrmcdsd
+
+# setuid user
+user = yrmcds
+
+# setgid group
+group = yrmcds
+
+# To become the master, virtual_ip address must be owned.
+virtual_ip = <%= @virtual_ip %>
+
+# memcache protocol port number.
+port = <%= @port %>
+
+# yrmcds replication protocol port number.
+repl_port = <%= @repl_port %>
+
+# max number of client connections.  0 means unlimited.
+max_connections = 10000
+
+# large objects are saved in this directory as temporary files.
+temp_dir = "/var/tmp/yrmcds"
+
+# possible values: error, warning, info, debug
+log.threshold = info
+
+# logs are recorded to this file.
+# If log.file is not defined, logs are printed to standard error.
+log.file = "/var/log/yrmcds.log"
+
+# Hash table size.  1 million is the sane default.
+buckets = 1000000
+
+# The maximum object size.  This is a soft-limit.
+# There is a compile-time hard-limit around 30 MiB.
+max_data_size = 10M
+
+# Objects larger than this will be stored in temporary files.
+heap_data_limit = 256K
+
+# The buffer size for asynchronous replication in MiB.
+# The value must be an integer > 0.  Default is 30 (MiB).
+repl_buffer_size = 30
+
+# Clear memory used by deleted or expired objects securely.
+# This ensures confidential data such as crypto keys will not be
+# leaked after expiration.
+# Consider setting "max_data_size" equal to "heap_data_limit" to
+# avoid writing confidential data into persistent storage when
+# you enable this option.
+secure_erase = false
+
+# Prevent memory from being swapped by using mlockall(2).
+lock_memory = false
+
+# The amount of memory allowed for the entire yrmcds.
+# This is by no means a hard limit; rather, this is just a hint for
+# the garbage collection.
+memory_limit = 1024M
+
+# The number of worker threads.
+workers = 10
+
+# The interval between garbage collections in seconds.
+gc_interval = 10
+
+# slave_timeout specifies how many seconds to wait for heartbeats from slaves
+# before the connection is forcibly closed.
+slave_timeout = 10
+
+#----------------------------------------------------------
+# configurations for counter extension
+
+# If true, the counter extension is enabled. (default: false)
+counter.enable = false
+
+# TCP port used for the counter protocol. (default: 11215)
+counter.port = <%= @counter_port %>
+
+# The maximum number of connections in the counter protocol.
+# 0 means unlimited. (default: 0)
+counter.max_connections = 0
+
+# The size of the counter hash table. (default: 1000000)
+counter.buckets = 1000000
+
+# The interval of measuring the maximum number of resource consumption
+# in seconds. (default: 86400)
+counter.stat_interval = 86400

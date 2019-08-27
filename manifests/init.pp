@@ -42,7 +42,19 @@
 #
 # Copyright 2019 Your name here, unless otherwise noted.
 #
-class yrmcds {
+class yrmcds (
+    $virtual_ip,
+    $port = 11211,
+    $repl_port = 11213,
+    $counter_port = 11215,
+){
+
+    package { "yrmcds":
+        ensure =>  installed,
+    } -> file { "yrmcds.conf":
+        path    => "/etc/yrmcds.conf",
+        content => template("$module_name/yrmcds.conf.erb"),
+    } ~> service { "yrmcds": ensure =>  running,}
 
 
 }
