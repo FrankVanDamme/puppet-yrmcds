@@ -57,4 +57,19 @@ class yrmcds (
     } ~> service { "yrmcds": ensure =>  running,}
 
 
+    $yrmcds_service_overrides_content = ".include /lib/systemd/system/yrmcds.service
+
+[Service]
+Restart=always
+RestartSec=5
+	"
+
+    file { "yrmcds_service_overrides":
+        path    => "/etc/systemd/system/yrmcds.service",
+        content => $yrmcds_service_overrides_content,
+        before  => Service["yrmcds"],
+    } ~> exec { "yrmcds_systemd_reload":
+        command     => "/bin/systemctl daemon-reload",
+        refreshonly => true,
+    }
 }
