@@ -1,5 +1,5 @@
 {
-  "name": "frvdamme-yrmcds",
+  "name": "frankvandamme-yrmcds",
   "version": "0.1.0",
   "author": "Frank Van Damme",
   "summary": "Installs and configures yrmcds, a master-slave replicating memcached implementation",
