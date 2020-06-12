@@ -17,30 +17,35 @@
 #
 # Here you should define a list of variables that this module would require.
 #
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# * `virtual_ip`
+#  Virtual IP to listen to (and set up the master at)
+#
+# * `port`
+#  Port for the application to query
+#
+# * `repl_port`
+#  Port for the replication between yrmcds instances
+#
+# * `counter_port`
+#  Port used for counter protocol
 #
 # Examples
 # --------
 #
 # @example
 #    class { 'yrmcds':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#      virtual_ip => '10.1.2.3',
 #    }
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Frank Van Damme <frank.vandamme@gmail.com>
 #
 # Copyright
 # ---------
 #
-# Copyright 2019 Your name here, unless otherwise noted.
+# Copyright 2019 Frank Van Damme, unless otherwise noted.
 #
 class yrmcds (
     $virtual_ip,
